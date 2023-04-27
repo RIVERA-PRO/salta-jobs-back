@@ -5,7 +5,7 @@ import Seller from "../../models/Seller.js";
 const destinos = {
     create: async (req, res, next) => {
         try {
-            const { telefono, web, instagram, facebook, mail, photo, name, title, cover_photo, categoria, description, ubicacion, salario, vacantes, lugar, fecha, seller_id, category_id, user_id } = req.body;
+            const { jornada, modalidad, requisitos, telefono, web, instagram, facebook, mail, photo, name, title, cover_photo, categoria, description, ubicacion, salario, vacantes, lugar, seller_id, category_id, user_id } = req.body;
             const category = await Category.findById(category_id); // encuentra la categoría por su id
 
             if (!category) {
@@ -16,6 +16,9 @@ const destinos = {
             }
 
             const destino = await Destino.create({
+                modalidad,
+                jornada,
+                requisitos,
                 title,
                 cover_photo,
                 description,
@@ -24,7 +27,6 @@ const destinos = {
                 lugar,
                 salario,
                 vacantes,
-                fecha,
                 seller_id,
                 category_id,
                 name,

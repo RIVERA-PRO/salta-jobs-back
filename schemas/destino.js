@@ -1,12 +1,9 @@
 import Joi from 'joi-oid';
 
 const schema = Joi.object({
-    // seller_id: Joi
-    //     .objectId()
-    //     .required(),
+
     photo: Joi
         .string()
-        // .required()
         .min(8)
         .uri()
         .messages(
@@ -26,14 +23,24 @@ const schema = Joi.object({
         .number(),
     salario: Joi
         .number(),
+    jornada: Joi
+        .string()
+        .min(1)
+        .max(100)
+    ,
+    modalidad: Joi
+        .string()
+        .min(1)
+        .max(100)
+    ,
     instagram: Joi
         .string()
-        .min(3)
+        .min(0)
         .max(100)
     ,
     facebook: Joi
         .string()
-        .min(3)
+        .min(0)
         .max(100)
     ,
     telefono: Joi
@@ -42,7 +49,7 @@ const schema = Joi.object({
     ,
     web: Joi
         .string()
-        .min(3)
+        .min(0)
         .max(100)
     ,
     name: Joi
@@ -68,10 +75,20 @@ const schema = Joi.object({
         .string()
         .required()
         .min(3)
-        .max(1000)
+        .max(1500)
         .messages({
             "string.min": "The title must have at least 3 characters",
-            "string.max": "The title must have a maximum of 1000 characters",
+            "string.max": "The title must have a maximum of 1500 characters",
+            'string.required': 'the title is required',
+        }),
+    requisitos: Joi
+        .string()
+        .required()
+        .min(3)
+        .max(500)
+        .messages({
+            "string.min": "The title must have at least 3 characters",
+            "string.max": "The title must have a maximum of 500 characters",
             'string.required': 'the title is required',
         }),
     ubicacion: Joi
@@ -113,20 +130,7 @@ const schema = Joi.object({
     user_id: Joi
         .objectId()
         .required(),
-    // pages: Joi
-    //     .array()
-    //     .required()
 
-    //     .messages({
-    //         "pages": "field must be a valid URL, separated by commas."
-    //     }),
-
-    // vacantes: Joi
-    //     .number()
-
-    //     .messages({
-    //         "price": "field must be a valid number."
-    //     }),
 })
 
 export default schema
